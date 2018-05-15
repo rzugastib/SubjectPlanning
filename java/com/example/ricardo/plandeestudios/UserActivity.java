@@ -26,10 +26,10 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void registro(View v){
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"administracion",null,2);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"administracion",null,6);
         SQLiteDatabase db = admin.getWritableDatabase();
         ContentValues registro = new ContentValues();
-        registro.put("Nombre",nombre.getText().toString());
+        registro.put("nombre",nombre.getText().toString());
         registro.put("idUser",usuario.getText().toString());
         registro.put("pwd",contra.getText().toString());
         registro.put("carrera",carrera.getText().toString());

@@ -16,16 +16,20 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
         bienvenida = (TextView) findViewById(R.id.tvBienvenida);
         b = this.getIntent().getExtras();
-        bienvenida.setText("Hola, "+ b.get("Nombre") +". Aquí te dejamos unos datos sobre tu carrera ");
+        bienvenida.setText("Hola, "+ b.get("Nombre") +". Aquí te dejamos unos datos sobre tu carrera ...");
+
         prom = (TextView) findViewById(R.id.tvPromedio);
         porc = (TextView) findViewById(R.id.tvPorcentaje);
         max = (TextView) findViewById(R.id.tvMax);
         grad = (TextView) findViewById(R.id.tvGraduacion);
         prueba = (TextView) findViewById(R.id.prueba);
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"administracion", null,2);
+
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"administracion", null,6);
         SQLiteDatabase db = admin.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select avg(calificacion) from materia where cursada = 1",null);
-        prom.setText(Double.toString(cursor.getDouble(0)));
+        Cursor cursor = db.rawQuery("select calificacion from vinculo where cursada = 1 and idUser = '" + b.get("Usuario") + "'",null);
+        //Cursor cursor = db.rawQuery("select avg(calificacion) from vinculo where cursada = 1 and idUser = '" + b.get("Usuario") + "''",null);
+        //prom.setText(Double.toString(cursor.getFloat(0)));
+        prueba.setText(Integer.toString(cursor.getInt(0)));
         db.close();
     }
 }

@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void ingresar(View v){
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"administracion",null,2);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"administracion",null,6);
         SQLiteDatabase db = admin.getWritableDatabase();
         Cursor cursor = db.rawQuery("select pwd, nombre, carrera from usuario where idUser = '"+ usuario.getText().toString() +"'",null);
         if(cursor.moveToNext()){
@@ -47,5 +47,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void registrar(View v){
         startActivity(new Intent(this,UserActivity.class));
+    }
+
+    public void auxiliar(View v){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"administracion", null,5);
+        admin.onUpgrade(admin.getWritableDatabase(),5,6);
     }
 }
